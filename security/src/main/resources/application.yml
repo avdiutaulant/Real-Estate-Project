@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/jwt_security
-    username: postgres
-    password: springstudent
+    url: jdbc:postgresql://localhost:5433/cacttus
+    username: cacttus
+    password: cacttus
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -21,3 +21,10 @@ application:
       expiration: 86400000  # a day
       refresh-token:
         expiration: 604800000 # 7 days
+
+
+
+
+
+
+
