@@ -38,12 +38,13 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (role != null) {
-            return List.of(new SimpleGrantedAuthority(role.name()));
-        } else {
-            // Return default authorities or empty list based on your requirements
-            return Collections.emptyList();
-        }
+        return role.getAuthorities();
+//        if (role != null) {
+//            return List.of(new SimpleGrantedAuthority(role.name()));
+//        } else {
+//            // Return default authorities or empty list based on your requirements
+//            return Collections.emptyList();
+//        }
     }
 
 
