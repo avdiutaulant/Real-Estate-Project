@@ -32,7 +32,7 @@ public class Property {
     private int bedrooms;
     private int bathrooms;
 
-    private String amentities;
+    private String amenities;
 
     private String description;
 

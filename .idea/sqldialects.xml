@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/security/src/main/resources/db.migration/V202404210001_create_user_table.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/security/src/main/resources/db.migration/V202404210002_create_token_table.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/security/src/main/resources/db.migration/V202404210003_create_address_table.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/security/src/main/resources/db.migration/V202404210004_create_agent_table.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/security/src/main/resources/db.migration/V202404210005_create_property_table.sql" dialect="PostgreSQL" />
+  </component>
+</project>

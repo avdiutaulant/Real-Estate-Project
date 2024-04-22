@@ -3,8 +3,8 @@ package com.example.security.auth;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -15,6 +15,7 @@ import java.io.IOException;
 @CrossOrigin(origins = "*")
 public class AuthenticationController {
 
+
     private final AuthenticationService service;
 
     @PostMapping("/signup")
@@ -24,7 +25,15 @@ public class AuthenticationController {
         return  ResponseEntity.ok(service.register(request));
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/signup/agent")
+    @PreAuthorize("isAuthenticated() and hasRole('ADMIN')")
+    public ResponseEntity<AuthenticationResponse> registerAgent(
+            @RequestBody RegisterRequest request
+    ){
+        return  ResponseEntity.ok(service.registerAgent(request));
+    }
+
+    @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ){

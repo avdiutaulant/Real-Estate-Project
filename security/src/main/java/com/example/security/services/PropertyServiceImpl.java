@@ -14,15 +14,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PropertyServiceImpl implements PropertyService{
+public class PropertyServiceImpl implements PropertyService {
 
-    private final PropertyMapper propertyMapper;
     private final AgentRepository agentRepository;
     private final PropertyRepository propertyRepository;
 
     @Autowired
-    public PropertyServiceImpl(PropertyMapper propertyMapper, AgentRepository agentRepository, PropertyRepository propertyRepository) {
-        this.propertyMapper = propertyMapper;
+    public PropertyServiceImpl( AgentRepository agentRepository, PropertyRepository propertyRepository) {
         this.agentRepository = agentRepository;
         this.propertyRepository = propertyRepository;
     }
@@ -39,30 +37,19 @@ public class PropertyServiceImpl implements PropertyService{
 
         Property property = null;
 
-        if (result.isPresent()){
-property = result.get();
+        if (result.isPresent()) {
+            property = result.get();
         } else {
-throw new RuntimeException("Did not find employee id " + id);
+            throw new RuntimeException("Did not find employee id " + id);
         }
 
         return property;
     }
 
     @Override
-    public Property save(Property property,int agentId) {
+    public Property save(Property property, int agentId) {
 
-//        Optional<Agent> result = agentRepository.findById(agentId);
-//
-//        Agent agent = null;
-//
-//        if (result.isPresent()){
-//            agent = result.get();
-//        } else {
-//            throw new RuntimeException("Did not find agent id " + agentId);
-//        }
-
-        Agent agent = agentRepository.findById(agentId).orElseThrow(()-> new EntityNotFoundException("Agent not found with id " + agentId));
-
+        Agent agent = agentRepository.findById(agentId).orElseThrow(() -> new EntityNotFoundException("Agent not found with id " + agentId));
 
         property.setAgent(agent);
         property.setCreatedAt(LocalDate.now());
@@ -77,7 +64,7 @@ throw new RuntimeException("Did not find employee id " + id);
     @Override
     public Property update(Property property, int id) {
 
-        Property oldProperty = propertyRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Property doesnt exist"));
+        Property oldProperty = propertyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Property doesnt exist"));
 
         oldProperty.setId(property.getId());
         oldProperty.setAddress(property.getAddress());
@@ -86,7 +73,7 @@ throw new RuntimeException("Did not find employee id " + id);
         oldProperty.setSize(property.getSize());
         oldProperty.setBedrooms(property.getBedrooms());
         oldProperty.setBathrooms(property.getBathrooms());
-        oldProperty.setAmentities(property.getAmentities());
+        oldProperty.setAmenities(property.getAmenities());
         oldProperty.setDescription(property.getDescription());
         oldProperty.setStatus(property.getStatus());
         oldProperty.setImages(property.getImages());
@@ -95,8 +82,8 @@ throw new RuntimeException("Did not find employee id " + id);
 
     @Override
     public Property changeAgent(int propertyId, int agentId) {
-        Property oldProperty = propertyRepository.findById(propertyId).orElseThrow(()->new EntityNotFoundException("Property doesnt exist"));
-        Agent agent = agentRepository.findById(agentId).orElseThrow(()->new EntityNotFoundException("Agent doesn't exist"));
+        Property oldProperty = propertyRepository.findById(propertyId).orElseThrow(() -> new EntityNotFoundException("Property doesnt exist"));
+        Agent agent = agentRepository.findById(agentId).orElseThrow(() -> new EntityNotFoundException("Agent doesn't exist"));
         oldProperty.setAgent(agent);
 
         return propertyRepository.save(oldProperty);

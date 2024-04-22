@@ -4,14 +4,16 @@ import com.example.security.dtos.AgentDto;
 import com.example.security.entities.Agent;
 import com.example.security.mappers.AgentMapper;
 import com.example.security.services.AgentService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin("*")
+@RequestMapping("/api/agents")
+@CrossOrigin(origins = "*")
+@PreAuthorize("hasAnyRole('ADMIN', 'USER', 'AGENT')")
 public class AgentController {
 
     private final AgentService agentService;
@@ -24,18 +26,19 @@ public class AgentController {
     }
 
 
-    @GetMapping("/agents")
+    @GetMapping("")
+    @PreAuthorize("hasAnyAuthority('admin:read','user:read','agent:read')")
     public List<AgentDto> findAll(){
         List<Agent> agents = agentService.findAll();
-        List<AgentDto> agentDtos = agents
+
+        return agents
                 .stream()
                 .map(agentMapper::toDto)
                 .collect(Collectors.toList());
-
-        return agentDtos;
     }
 
-    @GetMapping("agents/{agentId}")
+    @GetMapping("{agentId}")
+    @PreAuthorize("hasAnyAuthority('admin:read','user:read','agent:read')")
     public AgentDto agent (@PathVariable int agentId){
         Agent agent = agentService.findById(agentId);
 
@@ -46,7 +49,8 @@ public class AgentController {
         return agentMapper.toDto(agent);
     }
 
-    @PostMapping("/agents")
+    @PostMapping("")
+    @PreAuthorize("isAuthenticated() and hasAuthority('admin:create')")
     public AgentDto addAgent(@RequestBody AgentDto agent){
 
         agent.setId(0);
@@ -57,7 +61,8 @@ public class AgentController {
     }
 
 
-    @PutMapping("agents/{agentId}")
+    @PutMapping("{agentId}")
+    @PreAuthorize("isAuthenticated() and hasAuthority('admin:update')")
     public AgentDto updateAgent(@RequestBody AgentDto agentDto, @PathVariable int agentId){
         Agent existingAgent = agentService.findById(agentId);
 
@@ -74,7 +79,8 @@ public class AgentController {
     }
 
 
-    @DeleteMapping("agents/{agentId}")
+    @DeleteMapping("{agentId}")
+    @PreAuthorize("isAuthenticated() and hasAuthority('admin:delete')")
     public String deleteAgent(@PathVariable int agentId){
         Agent tempAgent = agentService.findById(agentId);
 

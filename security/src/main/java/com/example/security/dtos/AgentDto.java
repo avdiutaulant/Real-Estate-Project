@@ -16,6 +16,6 @@ public class AgentDto {
     private String name;
     private String contactInfo;
     private String email;
-
+    private String image;
     private Rating rating;
 }

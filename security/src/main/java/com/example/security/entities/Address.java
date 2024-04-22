@@ -21,8 +21,6 @@ public class Address {
     private String state;
     private String zipCode;
 
-//    @OneToOne(mappedBy = "address",
-//    cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-//    private Property property;
+
 
 }

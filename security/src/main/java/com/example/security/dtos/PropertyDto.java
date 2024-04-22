@@ -1,10 +1,8 @@
 package com.example.security.dtos;
 
 import com.example.security.entities.Address;
-import com.example.security.entities.Agent;
 import com.example.security.entities.Status;
 import com.example.security.entities.Type;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +25,7 @@ public class PropertyDto {
     private int bedrooms;
     private int bathrooms;
 
-    private String amentities;
+    private String amenities;
 
     private String description;
 

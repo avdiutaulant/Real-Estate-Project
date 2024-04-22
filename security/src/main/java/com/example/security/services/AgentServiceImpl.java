@@ -13,11 +13,11 @@ import java.util.Optional;
 public class AgentServiceImpl implements AgentService {
 
     private final AgentRepository agentRepository;
-    private final AgentMapper agentMapper;
 
-    public AgentServiceImpl(AgentRepository agentRepository, AgentMapper agentMapper) {
+    public AgentServiceImpl(AgentRepository agentRepository) {
         this.agentRepository = agentRepository;
-        this.agentMapper = agentMapper;
+
+
     }
 
     @Override

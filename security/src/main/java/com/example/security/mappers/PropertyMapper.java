@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class PropertyMapper {
 
-
     public Property toEntity(PropertyDto dto){
         Property property = new Property();
         property.setId(dto.getId());
@@ -17,7 +16,7 @@ public class PropertyMapper {
         property.setSize(dto.getSize());
         property.setBedrooms(dto.getBedrooms());
         property.setBathrooms(dto.getBathrooms());
-        property.setAmentities(dto.getAmentities());
+        property.setAmenities(dto.getAmenities());
         property.setDescription(dto.getDescription());
         property.setStatus(dto.getStatus());
         property.setImages(dto.getImages());
@@ -33,12 +32,11 @@ public class PropertyMapper {
         dto.setSize(property.getSize());
         dto.setBedrooms(property.getBedrooms());
         dto.setBathrooms(property.getBathrooms());
-        dto.setAmentities(property.getAmentities());
+        dto.setAmenities(property.getAmenities());
         dto.setDescription(property.getDescription());
         dto.setStatus(property.getStatus());
         dto.setAgentName(property.getAgent().getName());
         dto.setImages(property.getImages());
-
         return dto;
     }
 }

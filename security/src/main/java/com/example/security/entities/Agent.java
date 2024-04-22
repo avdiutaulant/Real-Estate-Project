@@ -19,10 +19,10 @@ public class Agent {
     private String name;
     private String contactInfo;
     private String email;
+    private String image;
 
     @Enumerated(EnumType.STRING)
     private Rating rating;
-
 
    @OneToMany(mappedBy = "agent",
    fetch = FetchType.EAGER,
